@@ -1,0 +1,25 @@
+# Spring相关配置
+spring:
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/HeartHome
+    username: root
+    password: 123456
+# mybatis相关配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.heart.heartPojo.Entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# jwt相关配置 --- 通过Config类获取
+jwt:
+  # 密钥
+  secret: fangrongfang516922fangrongfangrong922516922
+  # 算法
+  algorithm: HmacSHA256
+  # 过期时间
+  expire: 86400000
+  # 头部
+  header: jwtToken
