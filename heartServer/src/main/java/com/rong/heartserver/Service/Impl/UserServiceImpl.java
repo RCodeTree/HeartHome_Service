@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
         // 判断用户是否存在
         if (user == null) {
-            throw new UserLoginException("登录失败，用户不存在");
+            throw new UserLoginException("登录失败，用户不存在或密码错误");
         }
         return user;
     }

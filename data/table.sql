@@ -1,124 +1,138 @@
 /*
 创建数据库
 */
-create
-    database if not exists HeartHome;
+create database if not exists HeartHome;
 
 /*
 创建表
 */
 /*
 用户表
-	用户id(主键)
-    用户名
-    密码
-    用户头像路径
-    个人简介
-    用户地址
-    注册时间(加入时间)
+用户id(主键)
+用户名
+密码
+用户头像路径
+个人简介
+用户地址
+注册时间(加入时间)
 */
-create table if not exists user
-(
-    userid               varchar(32) not null primary key comment '用户id',
-    username             varchar(32) not null comment '用户名',
-    password             varchar(32) not null comment '用户密码',
-    avatar_url           varchar(255) comment '用户头像路径',
+create table if not exists user (
+    userid varchar(32) not null primary key comment '用户id',
+    username varchar(32) not null comment '用户名',
+    password varchar(32) not null comment '用户密码',
+    avatar_url varchar(255) default '/image/girl.giff' comment '用户头像路径',
     personal_description varchar(255) comment '个人简介',
-    address              varchar(255) comment '用户地址',
-    register_time        datetime comment '注册时间/加入时间',
+    address varchar(255) comment '用户地址',
+    register_time datetime comment '注册时间/加入时间',
     manager tinyint(1) default 0 comment '是否为管理员 0为普通用户 1为管理员'
 );
-insert into user
-values ('922', 'rong', '922516', '/image/girl.giff', '初始用户', '广西', now(), 1), ('516', 'fang', '922516', '/image/girl.giff', '初始用户', '河南', now(), 1);
 
-
+insert into
+    user
+values (
+        '922',
+        'rong',
+        '922516',
+        '/image/girl.giff',
+        '初始用户',
+        '广西',
+        now(),
+        1
+    ),
+    (
+        '516',
+        'fang',
+        '922516',
+        '/image/girl.giff',
+        '初始用户',
+        '河南',
+        now(),
+        1
+    );
 
 /*
 好友表
-	id(主键)
-    用户id
-    用户名
-    用户头像路径
-    在线状态
-	最后在线时间
+id(主键)
+用户id
+用户名
+用户头像路径
+在线状态
+最后在线时间
 */
 
 /*
 作品表 图片+标题+简短描述+详细描述+时间
-	id
-    用户id
-    作品标题
-    简短描述
-    作品图像路径  ---> 使用MySQL的JSON数据的形式
-    详细描述
-    发布时间
+id
+用户id
+作品标题
+简短描述
+作品图像路径  ---> 使用MySQL的JSON数据的形式
+详细描述
+发布时间
 */
 
 /*
 作品表 标题+文字内容+时间
-	id
-    用户id
-    作品标题
-    文字内容
-    发布时间
+id
+用户id
+作品标题
+文字内容
+发布时间
 */
 
 /*
 作品表 图片+发布时间
-	id
-    用户id
-    作品图像路径
-    发布时间
+id
+用户id
+作品图像路径
+发布时间
 */
 
 /*
 点赞表
-	id
-    用户id
-    作品id
-    点赞时间
+id
+用户id
+作品id
+点赞时间
 */
 
 /*
 评论表
-	id
-    用户id
-    作品id
-    评论时间
+id
+用户id
+作品id
+评论时间
 */
-
 
 /*
 消息表 TODO  涉及websocket  只有当两个人开始聊天时才会产生消息
-	id (主键),
-    conversation_id (外键, 关联 conversations.id), 
-    sender_id (外键, 关联 users.id),
-    content, 
-    created_at, 
-    is_read. 
+id (主键),
+conversation_id (外键, 关联 conversations.id), 
+sender_id (外键, 关联 users.id),
+content, 
+created_at, 
+is_read. 
 */
-
 
 /*
 会话表
-	id (INT UNSIGNED, PRIMARY KEY, AUTO_INCREMENT): 唯一会话ID。
-	当前用户id (INT UNSIGNED, NOT NULL, FK -> users.id): 第一个参与者的用户ID。
-	对方用户id (INT UNSIGNED, NOT NULL, FK -> users.id): 第二个参与者的用户ID。约束建议: 添加一个 CHECK 约束 (user1_id < user2_id) 和一个基于 (user1_id, user2_id) 的 UNIQUE 约束，以确保 user1_id 总是较小的那个，并防止用户 A-B 和用户 B-A 这种重复的会话记录。
-	会话创建时间 (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP): 会话创建时间。
-	最新会话创建时间 (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP): 会话最后一次有消息互动的时间，设为自动更新。用于会话列表排序。
-    最新消息id (INT UNSIGNED, NULL, FK -> messages.id): 指向该会话中最新一条消息的ID（方便快速查找最后一条消息的内容和时间戳以在列表中显示）。如果还没有消息，可以为NULL。
+id (INT UNSIGNED, PRIMARY KEY, AUTO_INCREMENT): 唯一会话ID。
+当前用户id (INT UNSIGNED, NOT NULL, FK -> users.id): 第一个参与者的用户ID。
+对方用户id (INT UNSIGNED, NOT NULL, FK -> users.id): 第二个参与者的用户ID。约束建议: 添加一个 CHECK 约束 (user1_id < user2_id) 和一个基于 (user1_id, user2_id) 的 UNIQUE 约束，以确保 user1_id 总是较小的那个，并防止用户 A-B 和用户 B-A 这种重复的会话记录。
+会话创建时间 (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP): 会话创建时间。
+最新会话创建时间 (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP): 会话最后一次有消息互动的时间，设为自动更新。用于会话列表排序。
+最新消息id (INT UNSIGNED, NULL, FK -> messages.id): 指向该会话中最新一条消息的ID（方便快速查找最后一条消息的内容和时间戳以在列表中显示）。如果还没有消息，可以为NULL。
 
 消息表
-	id (INT UNSIGNED, PRIMARY KEY, AUTO_INCREMENT): 唯一消息ID。
-	会话id (INT UNSIGNED, NOT NULL, FK -> conversations.id): 该消息属于哪个会话。
-	发送者/对方用户id (INT UNSIGNED, NOT NULL, FK -> users.id): 发送该消息的用户ID。
-	消息内容 (TEXT, NOT NULL): 消息的具体内容。可以是纯文本，也可以是JSON格式以支持富文本、图片等。
-	消息发送时间 (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP): 消息发送时间（对应前端的 timestamp）。
-    
-    会话双方通过建立一个唯一的会话id来指定消息会话归属哪双方
-    后期通过websocket和MySQL实现数据的实时性和持久性
-*/
+id (INT UNSIGNED, PRIMARY KEY, AUTO_INCREMENT): 唯一消息ID。
+会话id (INT UNSIGNED, NOT NULL, FK -> conversations.id): 该消息属于哪个会话。
+发送者/对方用户id (INT UNSIGNED, NOT NULL, FK -> users.id): 发送该消息的用户ID。
+消息内容 (TEXT, NOT NULL): 消息的具体内容。可以是纯文本，也可以是JSON格式以支持富文本、图片等。
+消息发送时间 (TIMESTAMP, DEFAULT CURRENT_TIMESTAMP): 消息发送时间（对应前端的 timestamp）。
 
+会话双方通过建立一个唯一的会话id来指定消息会话归属哪双方
+后期通过websocket和MySQL实现数据的实时性和持久性
+*/
 
 /*
 登录信息状态(Redis)
