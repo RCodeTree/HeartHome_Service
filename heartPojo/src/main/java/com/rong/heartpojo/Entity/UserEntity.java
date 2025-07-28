@@ -16,7 +16,7 @@ public class UserEntity {
     /**
      * 用户id
      */
-    private Integer userId;
+    private String userId;
 
     /**
      * 用户名
@@ -46,6 +46,21 @@ public class UserEntity {
     /**
      * 注册时间/加入时间
      */
-    private LocalDateTime registerTime;
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
+
+    /**
+     * 用户状态 0为正常 1为禁用
+     */
+    private Integer status;
+
+    /**
+     * 是否为管理员 0为普通用户 1为管理员
+     */
+    private Integer manager;
 
 }
