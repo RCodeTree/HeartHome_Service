@@ -22,4 +22,4 @@ jwt:
   # 过期时间
   expire: 86400000
   # 头部
-  header: jwtToken
+  header: Authorization

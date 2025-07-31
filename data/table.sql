@@ -17,6 +17,9 @@ use HeartHome;
 个人简介
 用户地址
 注册时间(加入时间)
+更新时间
+用户状态 0为正常 1为禁用
+是否为管理员 0为普通用户 1为管理员
 */
 create table if not exists user (
     userid varchar(32) not null primary key comment '用户id',

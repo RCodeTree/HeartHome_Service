@@ -1,6 +1,7 @@
 package com.rong.heartserver.Controller.User;
 
-import jakarta.servlet.http.HttpServletResponse;
+import com.rong.heartpojo.Entity.UserEntity;
+import com.rong.heartpojo.Vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -18,20 +19,20 @@ import com.rong.heartcommon.Utils.JwtUtils;
 import com.rong.heartpojo.Dto.LoginDto;
 
 @RestController
-@RequestMapping("/user/login")
+@RequestMapping("/user")
 @CrossOrigin("*") // 允许跨域请求
 @Slf4j
 public class UserController {
     @Autowired
-    UserService loginService;
+    UserService userService;
 
     @Autowired
     JwtUtilsYml jwtUtilsYml;
 
-    @PostMapping("/signin")
+    @PostMapping("/login/signin")
     public Result<Map<String, Object>> signin(@RequestBody LoginDto loginDto) {
         log.info("Controller---用户登录：{}, {}", loginDto.getUsername(), loginDto.getPassword());
-        LoginDto user = loginService.signin(loginDto);
+        LoginDto user = userService.signin(loginDto);
 
         /*
          * 生成JWT token
@@ -62,10 +63,21 @@ public class UserController {
         return Result.success(200, "登录成功", responseData); // 返回包含user和jwtToken的结果
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/login/signup")
     public Result signup(@RequestBody LoginDto loginDto) {
         log.info("Controller---用户注册：{}, {}", loginDto.getUsername(), loginDto.getPassword());
-        loginService.signup(loginDto);
+        userService.signup(loginDto);
         return Result.success(200, "注册成功", null);
+    }
+
+    @GetMapping("/userInfo/{username}")
+    @CrossOrigin("*")
+    public Result getUserInfo(@PathVariable String username) {
+        log.info("Controller---获取用户信息：{}", username);
+        if (username == null) {
+            return Result.error("用户名不能为空");
+        }
+        UserInfoVo userInfo = userService.getUserInfo(username);
+        return Result.success(200, "获取用户信息成功", userInfo);
     }
 }
