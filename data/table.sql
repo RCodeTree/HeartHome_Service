@@ -67,7 +67,7 @@ values (
 作品表
 */
 CREATE TABLE works (
-    work_id VARCHAR(32) PRIMARY KEY COMMENT '作品ID',
+    work_id VARCHAR(6) PRIMARY KEY DEFAULT (CONCAT(LPAD(FLOOR(RAND() * 1000000), 6, '0'))) COMMENT '作品ID',
     user_id VARCHAR(32) NOT NULL COMMENT '用户ID', -- 逻辑外键,关联user表
     title VARCHAR(200) COMMENT '作品标题',
     image_url VARCHAR(255) COMMENT '作品图片路径',
@@ -134,7 +134,7 @@ CREATE TABLE likes (
 评论表
 */
 CREATE TABLE comments (
-    comment_id VARCHAR(32) PRIMARY KEY COMMENT '评论ID',
+    comment_id VARCHAR(6) PRIMARY KEY DEFAULT (CONCAT(LPAD(FLOOR(RAND() * 1000000), 6, '0'))) COMMENT '评论ID',
     work_id VARCHAR(32) NOT NULL COMMENT '作品ID', -- 逻辑外键
     user_id VARCHAR(32) NOT NULL COMMENT '用户ID', -- 逻辑外键
     parent_id VARCHAR(32) DEFAULT NULL COMMENT '父评论ID', -- 逻辑外键
@@ -149,7 +149,7 @@ CREATE TABLE comments (
 会话表
 */
 CREATE TABLE conversations (
-    conversation_id VARCHAR(32) PRIMARY KEY COMMENT '会话ID',
+    conversation_id VARCHAR(6) PRIMARY KEY DEFAULT (CONCAT(LPAD(FLOOR(RAND() * 1000000), 6, '0'))) COMMENT '会话ID',
     user1_id VARCHAR(32) NOT NULL COMMENT '用户1ID', -- 逻辑外键
     user2_id VARCHAR(32) NOT NULL COMMENT '用户2ID', -- 逻辑外键
     last_message_id VARCHAR(32) COMMENT '最后消息ID', -- 逻辑外键
@@ -164,7 +164,7 @@ CREATE TABLE conversations (
 消息表
 */
 CREATE TABLE messages (
-    message_id VARCHAR(32) PRIMARY KEY COMMENT '消息ID',
+    message_id VARCHAR(6) PRIMARY KEY DEFAULT (CONCAT(LPAD(FLOOR(RAND() * 1000000), 6, '0'))) COMMENT '消息ID',
     conversation_id VARCHAR(32) NOT NULL COMMENT '会话ID', -- 逻辑外键
     sender_id VARCHAR(32) NOT NULL COMMENT '发送者ID', -- 逻辑外键
     content TEXT NOT NULL COMMENT '消息内容',

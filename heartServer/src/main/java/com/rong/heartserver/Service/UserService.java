@@ -3,6 +3,7 @@ package com.rong.heartserver.Service;
 import com.rong.heartpojo.Dto.LoginDto;
 import com.rong.heartpojo.Entity.UserEntity;
 import com.rong.heartpojo.Vo.UserInfoVo;
+import com.rong.heartpojo.Vo.WorksVo;
 
 public interface UserService {
     /*
@@ -28,7 +29,7 @@ public interface UserService {
      *
      * @param username 用户名
      *
-     * @return 用户信息
+     * @return UserInfoVo 用户信息
      */
     UserInfoVo getUserInfo(String username);
 }

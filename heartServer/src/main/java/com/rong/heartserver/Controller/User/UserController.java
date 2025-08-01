@@ -1,7 +1,7 @@
 package com.rong.heartserver.Controller.User;
 
-import com.rong.heartpojo.Entity.UserEntity;
 import com.rong.heartpojo.Vo.UserInfoVo;
+import com.rong.heartpojo.Vo.WorksVo;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -71,8 +71,7 @@ public class UserController {
     }
 
     @GetMapping("/userInfo/{username}")
-    @CrossOrigin("*")
-    public Result getUserInfo(@PathVariable String username) {
+    public Result<UserInfoVo> getUserInfo(@PathVariable String username) {
         log.info("Controller---获取用户信息：{}", username);
         if (username == null) {
             return Result.error("用户名不能为空");
@@ -80,4 +79,5 @@ public class UserController {
         UserInfoVo userInfo = userService.getUserInfo(username);
         return Result.success(200, "获取用户信息成功", userInfo);
     }
+
 }
