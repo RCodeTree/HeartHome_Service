@@ -34,7 +34,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (authHeader == null || !authHeader.startsWith("Bearer ") || authHeader.length() <= 7) {
             log.warn("Interceptor---无效的Authorization头：{}", authHeader);
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(JsonUtils.toJson(Result.error("Token令牌格式错误")));
+            response.getWriter().write(JsonUtils.toJson(Result.error(401, "Token令牌格式错误")));
             return false;
         }
 
@@ -45,7 +45,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         // 验证token是否为空
         if (jwtToken.trim().isEmpty()) {
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(JsonUtils.toJson(Result.error("Token令牌不存在")));
+            response.getWriter().write(JsonUtils.toJson(Result.error(401, "Token令牌不存在")));
             return false;
         }
 
