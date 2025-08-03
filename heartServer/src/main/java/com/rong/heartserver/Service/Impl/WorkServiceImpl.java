@@ -28,4 +28,32 @@ public class WorkServiceImpl implements WorkService {
         List<WorksVo> works = workMapper.getWorksForAll(username);
         return works;
     }
+
+    /*
+     * 获取用户文章
+     *
+     * @param username 用户名
+     *
+     * @return List<WorksVo> 用户文章列表
+     */
+    @Override
+    public List<WorksVo> getWorksForEssay(String username) {
+        List<WorksVo> essays = workMapper.getWorksForEssay(username);
+        return essays;
+    }
+
+    /*
+     * 获取用户图片
+     *
+     * @param username 用户名
+     *
+     * @return List<WorksVo> 用户图片列表
+     */
+    @Override
+    public List<WorksVo> getWorksForImage(String username) {
+        List<WorksVo> images = workMapper.getWorksForImage(username);
+        return images;
+    }
+
+
 }

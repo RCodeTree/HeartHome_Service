@@ -14,8 +14,28 @@ public interface WorkMapper {
      *
      * @param username 用户名
      *
-     * @return WorksVo 用户作品列表
+     * @return List<WorksVo> 用户作品列表
      */
-    @Select("SELECT w.title, w.short_desc, w.image_url, w.created_at as createTime, w.work_type, COUNT(DISTINCT l.user_id) as likesCount, COUNT(DISTINCT c.comment_id) as commentsCount FROM works w LEFT JOIN likes l ON w.work_id = l.work_id LEFT JOIN comments c ON w.work_id = c.work_id WHERE w.user_id = (SELECT userid FROM user WHERE username = #{username}) GROUP BY w.work_id, w.title, w.short_desc, w.image_url, w.created_at, w.work_type;")
+    @Select("SELECT w.title, w.short_desc, w.image_url, w.created_at as createTime, w.work_type, COUNT(DISTINCT l.user_id) as likesCount, COUNT(DISTINCT c.comment_id) as commentsCount FROM works w LEFT JOIN likes l ON w.work_id = l.work_id LEFT JOIN comments c ON w.work_id = c.work_id WHERE w.user_id = (SELECT userid FROM user WHERE username = #{username}) and w.work_type = 'image_title_desc' GROUP BY w.work_id, w.title, w.short_desc, w.image_url, w.created_at, w.work_type;")
     List<WorksVo> getWorksForAll(String username);
+
+    /*
+     * 获取用户文章
+     *
+     * @param username 用户名
+     *
+     * @return List<WorksVo> 用户文章列表
+     */
+    @Select("SELECT w.title, w.short_desc, w.created_at as createTime, w.work_type, COUNT(DISTINCT l.user_id) as likesCount, COUNT(DISTINCT c.comment_id) as commentsCount FROM works w LEFT JOIN likes l ON w.work_id = l.work_id LEFT JOIN comments c ON w.work_id = c.work_id WHERE w.user_id = (SELECT userid FROM user WHERE username = #{username}) and w.work_type = 'title_desc' GROUP BY w.work_id, w.title, w.short_desc, w.created_at, w.work_type;")
+    List<WorksVo> getWorksForEssay(String username);
+
+    /*
+     * 获取用户图片
+     *
+     * @param username 用户名
+     *
+     * @return List<WorksVo> 用户图片列表
+     */
+    @Select("select image_url as imageUrl, created_at as createTime from works as w where w.user_id = (SELECT userid FROM user WHERE username = #{username}) and work_type = 'image_only';")
+    List<WorksVo> getWorksForImage(String username);
 }

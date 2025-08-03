@@ -28,4 +28,28 @@ public class WorkController {
         log.info("Controller---获取用户作品：{}", works);
         return Result.success(200, "获取用户作品成功", works);
     }
+
+    @GetMapping("/essay/{username}")
+    public Result<List<WorksVo>> getWorksOfEssay(@PathVariable String username) {
+        log.info("Controller---获取用户文章：{}", username);
+        if (username == null) {
+            return Result.error("用户名不能为空");
+        }
+        List<WorksVo> works = workService.getWorksForEssay(username);
+        log.info("Controller---获取用户文章：{}", works);
+        return Result.success(200, "获取用户文章成功", works);
+    }
+
+    @GetMapping("/image/{username}")
+    public Result<List<WorksVo>> getWorksOfImage(@PathVariable String username) {
+        log.info("Controller---获取用户图片标题描述：{}", username);
+        if (username == null) {
+            return Result.error("用户名不能为空");
+        }
+
+        List<WorksVo> works = workService.getWorksForImage(username);
+
+        log.info("Controller---获取用户图片标题描述：{}", works);
+        return Result.success(200, "获取用户图片成功", works);
+    }
 }

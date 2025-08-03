@@ -13,4 +13,22 @@ public interface WorkService {
      * @return WorksVo 用户作品列表
      */
     List<WorksVo> getWorksForAll(String username);
+
+    /*
+     * 获取用户文章
+     *
+     * @param username 用户名
+     *
+     * @return WorksVo 用户文章列表
+     */
+    List<WorksVo> getWorksForEssay(String username);
+
+    /*
+     * 获取用户图片
+     *
+     * @param username 用户名
+     *
+     * @return List<WorksVo> 用户图片列表
+     */
+    List<WorksVo> getWorksForImage(String username);
 }
