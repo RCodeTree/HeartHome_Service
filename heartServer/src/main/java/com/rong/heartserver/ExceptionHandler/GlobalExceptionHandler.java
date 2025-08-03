@@ -1,7 +1,7 @@
 package com.rong.heartserver.ExceptionHandler;
 
-import com.rong.heartcommon.Exception.Login.UserLoginException;
-import com.rong.heartcommon.Exception.Login.UserSinUpException;
+import com.rong.heartcommon.Exception.User.UserLoginException;
+import com.rong.heartcommon.Exception.User.UserSinUpException;
 import com.rong.heartcommon.Result.Result;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

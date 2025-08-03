@@ -1,4 +1,4 @@
-package com.rong.heartcommon.Exception.Login;
+package com.rong.heartcommon.Exception.User;
 
 /**
  * @ClassName: UserLoginException
