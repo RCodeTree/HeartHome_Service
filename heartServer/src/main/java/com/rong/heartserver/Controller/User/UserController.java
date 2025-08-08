@@ -2,9 +2,11 @@ package com.rong.heartserver.Controller.User;
 
 import com.rong.heartpojo.Vo.UserInfoVo;
 import com.rong.heartpojo.Vo.WorksVo;
+import com.rong.heartserver.Service.FriendService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.crypto.SecretKey;
@@ -24,11 +26,14 @@ import com.rong.heartpojo.Dto.LoginDto;
 @Slf4j
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
+    @Autowired
+    private FriendService friendService;
 
     @Autowired
     JwtUtilsYml jwtUtilsYml;
 
+    // 用户登录
     @PostMapping("/login/signin")
     public Result<Map<String, Object>> signin(@RequestBody LoginDto loginDto) {
         log.info("Controller---用户登录：{}, {}", loginDto.getUsername(), loginDto.getPassword());
@@ -63,6 +68,7 @@ public class UserController {
         return Result.success(200, "登录成功", responseData); // 返回包含user和jwtToken的结果
     }
 
+    // 用户注册
     @PostMapping("/login/signup")
     public Result signup(@RequestBody LoginDto loginDto) {
         log.info("Controller---用户注册：{}, {}", loginDto.getUsername(), loginDto.getPassword());
@@ -70,6 +76,7 @@ public class UserController {
         return Result.success(200, "注册成功", null);
     }
 
+    // 获取用户信息
     @GetMapping("/userInfo/{username}")
     public Result<UserInfoVo> getUserInfo(@PathVariable String username) {
         log.info("Controller---获取用户信息：{}", username);
@@ -78,6 +85,18 @@ public class UserController {
         }
         UserInfoVo userInfo = userService.getUserInfo(username);
         return Result.success(200, "获取用户信息成功", userInfo);
+    }
+
+    // 获取用户好友列表
+    @GetMapping("/friends/{username}")
+    public Result<List<UserInfoVo>> getFriends(@PathVariable String username) {
+        log.info("Controller---获取用户好友列表：{}", username);
+        if (username == null) {
+            return Result.error("用户名不能为空");
+        }
+        List<UserInfoVo> friends = friendService.getFriends(username);
+
+        return Result.success(200, "获取用户好友列表成功", friends);
     }
 
 }
