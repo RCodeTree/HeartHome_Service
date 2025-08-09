@@ -1,5 +1,6 @@
 package com.rong.heartserver.ExceptionHandler;
 
+import com.rong.heartcommon.Exception.CommonException.GetDataException;
 import com.rong.heartcommon.Exception.User.UserLoginException;
 import com.rong.heartcommon.Exception.User.UserSinUpException;
 import com.rong.heartcommon.Result.Result;
@@ -22,6 +23,12 @@ public class GlobalExceptionHandler {
     // 用户注册异常
     @ExceptionHandler(UserSinUpException.class)
     public Result handleUserAuthenticationException(UserSinUpException e) {
+        return Result.error(e.getDetailMessage());
+    }
+
+    // 获取数据异常
+    @ExceptionHandler(GetDataException.class)
+    public Result handleGetDataException(GetDataException e) {
         return Result.error(e.getDetailMessage());
     }
 }

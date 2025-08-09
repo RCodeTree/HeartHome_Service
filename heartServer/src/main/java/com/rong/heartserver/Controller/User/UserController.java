@@ -1,5 +1,6 @@
 package com.rong.heartserver.Controller.User;
 
+import com.rong.heartpojo.Entity.UserEntity;
 import com.rong.heartpojo.Vo.UserInfoVo;
 import com.rong.heartpojo.Vo.WorksVo;
 import com.rong.heartserver.Service.FriendService;
@@ -89,12 +90,12 @@ public class UserController {
 
     // 获取用户好友列表
     @GetMapping("/friends/{username}")
-    public Result<List<UserInfoVo>> getFriends(@PathVariable String username) {
+    public Result<List<UserEntity>> getFriends(@PathVariable String username) {
         log.info("Controller---获取用户好友列表：{}", username);
         if (username == null) {
             return Result.error("用户名不能为空");
         }
-        List<UserInfoVo> friends = friendService.getFriends(username);
+        List<UserEntity> friends = friendService.getFriends(username);
 
         return Result.success(200, "获取用户好友列表成功", friends);
     }

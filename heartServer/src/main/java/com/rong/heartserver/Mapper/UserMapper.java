@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import com.rong.heartpojo.Dto.LoginDto;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -84,4 +85,15 @@ public interface UserMapper {
      */
     @Select("select count(*) from follows as f where (select userid from user where username = #{username}) = f.follower_id;")
     Integer getFollowsCount(String username);
+
+    /*
+     * 获取用户好友列表
+     *
+     * @param username 用户名
+     *
+     * @return List<UserEntity> 好友列表
+     */
+    @Select("select friend.username, friend.avatar_url, friend.status from follows f1, follows f2, ( select userid from user where username = #{username} ) currentUser, user friend where f1.follower_id = f2.following_id and f1.following_id = f2.follower_id and currentUser.userid = f1.follower_id and friend.userid = f2.follower_id and currentUser.userid != friend.userid;")
+    List<UserEntity> getFriends(String username);
+
 }

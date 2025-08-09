@@ -1,10 +1,10 @@
 package com.rong.heartserver.Service;
 
-import com.rong.heartpojo.Vo.UserInfoVo;
+import com.rong.heartpojo.Entity.UserEntity;
 
 import java.util.List;
 
 public interface FriendService {
 
-    List<UserInfoVo> getFriends(String username);
+    List<UserEntity> getFriends(String username);
 }
