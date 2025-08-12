@@ -97,7 +97,7 @@ public class UserController {
         }
         List<UserEntity> friends = friendService.getFriends(username);
 
-        return Result.success(200, "获取用户好友列表成功", friends);
+        return Result.success(200, "你的 " + friends.size() + " 位心友成功到达", friends);
     }
 
 }

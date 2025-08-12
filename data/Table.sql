@@ -37,31 +37,31 @@ create table if not exists user (
 );
 
 insert into
-    user
-values (
-        '922',
-        'rong',
-        '922516',
-        '/image/OIP - C (11).jpg',
-        '初始用户',
-        '广西',
-        now(),
-        now(),
-        0,
-        1
-    ),
-    (
-        '516',
-        'fang',
-        '922516',
-        '/image/OIP - C (11).jpg',
-        '初始用户',
-        '河南',
-        now(),
-        now(),
-        0,
-        1
-    );
+          user
+      values (
+              '922',
+              'rong',
+              '922516',
+              '/image/manager.jpg',
+              '初始用户',
+              '广西',
+              now(),
+              now(),
+              0,
+              1
+          ),
+          (
+              '516',
+              'fang',
+              '922516',
+              '/image/manager.jpg',
+              '初始用户',
+              '河南',
+              now(),
+              now(),
+              0,
+              1
+          );
 
 /*
 作品表

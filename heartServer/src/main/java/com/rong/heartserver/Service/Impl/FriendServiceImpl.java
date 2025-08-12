@@ -22,7 +22,7 @@ public class FriendServiceImpl implements FriendService {
             return friends; // 返回用户好友列表
         } catch (Exception e) {
             System.out.println(e);
-            throw new GetDataException("获取用户好友列表失败,请刷新重试");
+            throw new GetDataException("你的心友似乎不给力,请刷新重试");
         }
 
     }
