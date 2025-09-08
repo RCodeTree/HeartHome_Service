@@ -27,7 +27,7 @@ public class Result<T> implements Serializable {
      * @return Result对象
      */
     public static <E> Result<E> success() {
-        return new Result<>(200, "success", null);
+        return new Result<E>(200, "success", null);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Result<T> implements Serializable {
      * @return Result对象
      */
     public static <E> Result<E> success(E data) {
-        return new Result<>(200, "success", data);
+        return new Result<E>(200, "success", data);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Result<T> implements Serializable {
      * @return Result对象
      */
     public static <E> Result<E> success(Integer code, String msg, E data) {
-        return new Result<>(code, msg, data);
+        return new Result<E>(code, msg, data);
     }
 
     /**
@@ -62,7 +62,7 @@ public class Result<T> implements Serializable {
      * @return Result对象
      */
     public static <E> Result<E> error(String msg) {
-        return new Result<>(500, msg, null);
+        return new Result<E>(500, msg, null);
     }
 
     /**
@@ -74,6 +74,6 @@ public class Result<T> implements Serializable {
      * @return Result对象
      */
     public static <E> Result<E> error(Integer code, String msg) {
-        return new Result<>(code, msg, null);
+        return new Result<E>(code, msg, null);
     }
 }

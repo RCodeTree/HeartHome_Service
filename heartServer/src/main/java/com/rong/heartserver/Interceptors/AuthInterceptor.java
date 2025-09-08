@@ -59,7 +59,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             // 抛出异常，返回错误结果
             log.error("Interceptor---Token校验失败：{}", e.getMessage());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(JsonUtils.toJson(Result.error(401, "Token校验失败或过期")));
+            response.getWriter().write(JsonUtils.toJson(Result.<Void>error(401, "Token校验失败或过期")));
             return false;
         }
 

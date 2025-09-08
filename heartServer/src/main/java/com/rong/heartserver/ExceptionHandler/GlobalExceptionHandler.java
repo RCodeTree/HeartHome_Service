@@ -16,19 +16,19 @@ public class GlobalExceptionHandler {
 
     // 用户登录异常
     @ExceptionHandler(UserLoginException.class)
-    public Result handleUserAuthenticationException(UserLoginException e) {
+    public Result<?> handleUserAuthenticationException(UserLoginException e) {
         return Result.error(e.getDetailMessage());
     }
 
     // 用户注册异常
     @ExceptionHandler(UserSinUpException.class)
-    public Result handleUserAuthenticationException(UserSinUpException e) {
+    public Result<?> handleUserAuthenticationException(UserSinUpException e) {
         return Result.error(e.getDetailMessage());
     }
 
     // 获取数据异常
     @ExceptionHandler(GetDataException.class)
-    public Result handleGetDataException(GetDataException e) {
+    public Result<?> handleGetDataException(GetDataException e) {
         return Result.error(e.getDetailMessage());
     }
 }

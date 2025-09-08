@@ -71,7 +71,7 @@ public class UserController {
 
     // 用户注册
     @PostMapping("/login/signup")
-    public Result signup(@RequestBody LoginDto loginDto) {
+    public Result<?> signup(@RequestBody LoginDto loginDto) {
         log.info("Controller---用户注册：{}, {}", loginDto.getUsername(), loginDto.getPassword());
         userService.signup(loginDto);
         return Result.success(200, "注册成功", null);
