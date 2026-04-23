@@ -12,8 +12,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUser(String name, Integer age) {
-        User user = userMapper.getUser(name, age);
+    public User getUser(String name) {
+        User user = userMapper.getUser(name);
         return user;
     }
 }

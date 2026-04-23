@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
-    @Select("select * from user where name = #{name} and age = #{age}")
-    User getUser(String name, Integer age);
+    @Select("select * from user where name = #{name}")
+    User getUser(String name);
 
 
 }
